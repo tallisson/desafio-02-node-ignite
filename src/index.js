@@ -28,7 +28,7 @@ function checksCreateTodosUserAvailability(request, response, next) {
   // Complete aqui
   const { user } = request;
 
-  if(!(user.todos.length < 10 && !user.pro)) {
+  if((user.todos.length > 10 && !user.pro)) {
     return response.status(403).json({
       error: 'User can\'t post more todos'
     });
