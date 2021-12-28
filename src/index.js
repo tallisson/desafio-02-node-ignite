@@ -52,7 +52,7 @@ function checksTodoExists(request, response, next) {
   const idIsValid = validate(id);  
 
   if(!idIsValid) {
-    return response.status(404).json({
+    return response.status(400).json({
       error: 'Id isn\'t valid!'
     });
   }
