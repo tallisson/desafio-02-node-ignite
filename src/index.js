@@ -11,7 +11,7 @@ const users = [];
 
 function checksExistsUserAccount(request, response, next) {
   // Complete aqui
-  const { username } = request.header;
+  const { username } = request.headers;
 
   const user = users.find(user => user.username === username);
   if(!user) {
@@ -28,7 +28,7 @@ function checksCreateTodosUserAvailability(request, response, next) {
   // Complete aqui
   const { user } = request;
 
-  if((user.todos.length > 10 && !user.pro)) {
+  if(user.todos.length > 10 && !user.pro) {
     return response.status(403).json({
       error: 'User can\'t post more todos'
     });
@@ -39,7 +39,7 @@ function checksCreateTodosUserAvailability(request, response, next) {
 
 function checksTodoExists(request, response, next) {
   // Complete aqui
-  const { username } = request.header;
+  const { username } = request.headers;
 
   const user = users.find(user => user.username === username);
   if(!user) {
@@ -57,7 +57,7 @@ function checksTodoExists(request, response, next) {
     });
   }
 
-  const todoFromUser = users.todos.find(todo => todo.id === id);
+  const todoFromUser = user.todos.find(todo => todo.id === id);
   if(!todoFromUser) {
     return response.status(404).json({
       error: 'Todo don\'t belong to user!'
